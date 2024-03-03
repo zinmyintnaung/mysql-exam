@@ -10,7 +10,7 @@ CREATE TABLE books
 		pages INT,
 		PRIMARY KEY(book_id)
 	);
-
+-- TESTING DATA
 INSERT INTO books (title, author_fname, author_lname, released_year, stock_quantity, pages)
 VALUES
 ('The Namesake', 'Jhumpa', 'Lahiri', 2003, 32, 291),
@@ -33,3 +33,36 @@ VALUES
 -- CONCAT
 SELECT CONCAT(author_fname,' ', author_lname) AS author_name FROM books;
 SELECT CONCAT_WS('/',title, author_fname, author_lname) FROM books;
+
+--SUBSTR
+SELECT SUBSTRING(title, 1, 10) AS 'short title' FROM books;
+SELECT SUBSTR(title, 1, 10) AS 'short title' FROM books;
+SELECT CONCAT(SUBSTRING(title, 1, 10), '...') AS 'short title' FROM books;
+SELECT CONCAT(author_fname, ' ', SUBSTR(author_lname, 1, 1), '.') AS 'short title' FROM books;
+SELECT 
+    CONCAT(SUBSTR(title, 1, 10), '...') AS short_title,
+    CONCAT(author_lname, ',', author_fname) AS author,
+    CONCAT(stock_quantity, ' in stock') AS quantity
+FROM
+    books;
+
+--REPLACE
+SELECT REPLACE(author_lname, 'Eggers', 'Eg.') FROM books;
+
+--REVERSE
+SELECT CONCAT(author_fname, REVERSE(author_fname)) FROM books;
+
+--CHAR_LENGTH
+SELECT CONCAT(author_lname, ' is ', CHAR_LENGTH(author_lname), ' characters long') FROM books;
+
+--UPPER/LOWER
+SELECT CONCAT('MY FAVORITE BOOK IS ', UPPER(title)) FROM books;
+SELECT CONCAT('MY FAVORITE BOOK IS ', LOWER(title)) FROM books;
+
+--MORE FUNCTIONS
+SELECT INSERT('Hello Bobby', 6, 0, 'There'); --Second param is where to start, third param is how many char to replace with fourth param
+SELECT LEFT('omghahalol!', 3);
+SELECT RIGHT('omghahalol!', 4);
+SELECT REPEAT('ha', 4);
+SELECT TRIM('  pickle  ');
+
