@@ -28,6 +28,10 @@ SELECT title, pages FROM books order by pages desc LIMIT 1;
 SELECT title, released_year
 FROM books
 WHERE released_year = (SELECT MIN(released_year) FROM books);
+--CASE: author who wrote longest book with most pages
+SELECT CONCAT(author_fname, ' ', author_lname) AS author
+FROM books
+WHERE pages = (SELECT MAX(pages) FROM books);
 
 --GROUP BY (Multiple columns)
 --CASE: get the list of total number of books written by each author (two groups created and same last name will be considered)
@@ -63,4 +67,3 @@ SELECT AVG(pages) FROM books;
 SELECT author_fname, COUNT(*) AS total_no_books, AVG(pages) 
 FROM books 
 GROUP BY author_fname ORDER BY total_no_books DESC;
-
