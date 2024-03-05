@@ -117,3 +117,15 @@ SELECT title, rating, CONCAT(first_name, ' ', last_name) AS reviewer
 FROM series 
 INNER JOIN reviews ON series.id = reviews.series_id
 INNER JOIN reviewers ON reviewers.id = reviews.reviewer_id;
+
+--CASE: get series title, average rating and total reviews with average rating above 8 and five or more poople gave review
+--USAGE OF HAVING (to add condition on aggregated data)
+SELECT title, AVG(rating), COUNT(rating) AS review_count
+FROM series 
+INNER JOIN reviews ON series.id = reviews.series_id 
+GROUP BY title HAVING AVG(rating) > 8 AND COUNT(rating) >= 5;
+--WITH ROLLUP (this provide summary of additional statistics on GROUP BY)
+SELECT title, AVG(rating), COUNT(rating) AS review_count
+FROM series 
+INNER JOIN reviews ON series.id = reviews.series_id 
+GROUP BY title WITH ROLLUP;
