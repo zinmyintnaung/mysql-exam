@@ -6,6 +6,13 @@ JOIN reviewers ON reviewers.id = reviews.reviewer_id;
  
 -- NOW WE CAN TREAT THAT VIEW AS A VIRTUAL TABLE
 SELECT * FROM full_reviews;
+-- NO NEED TO JOIN THE TABLES AS ALREADY CREATED AS VIEW
+SELECT 
+    title, 
+    AVG(rating),
+    COUNT(rating) AS review_count
+FROM full_reviews 
+GROUP BY title HAVING COUNT(rating) > 1;
 
 --UPDATING & DROPPING VIEW
 CREATE VIEW ordered_series AS
